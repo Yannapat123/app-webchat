@@ -1,5 +1,9 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+<!--  -->
+วิธีใช้ webchat 
+1 ทักแชท line Oa 
+2 webchat ตอบกลับ  (ถ้าไม่มีการทักแชทจาก user จะไม่สามารถตอบกลับได้)
 ## Getting Started
 สิ่งที่ต้อง config line oa , pusher
 .env ที่ควรมี
