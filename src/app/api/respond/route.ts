@@ -17,6 +17,7 @@ export async function POST(req: Request) {
 
     for (const event of body.events || []) {
         if (event.type === 'message' && event.message.type === 'text') {
+            console.log('event.source', event)
             const userId = event.source.userId
 
             // เก็บ userId   

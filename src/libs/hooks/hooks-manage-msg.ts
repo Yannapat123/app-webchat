@@ -52,9 +52,11 @@ export const useManageMsg = () => {
         // regis event
         const channel = pusher.subscribe('line-chat')
         channel.bind('new-message', (data: Message) => {
+
             setMsgs(prev => [...prev, data])
 
             if (data.userId) {
+                // set userId เพื่อส่งข้อความตอบกลับ
                 setSelectedUserId(data.userId)
             }
         })
