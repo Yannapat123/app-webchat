@@ -1,7 +1,5 @@
 'use client'
-import { useManageMsg } from '../hooks/hooks-send-msg';
-
-
+import { useManageMsg } from '../hooks/hooks-manage-msg';
 
 export const Container = () => {
     const { handleSendMsg, listText, inputText, setInputText, msgs } = useManageMsg();
@@ -21,10 +19,8 @@ export const Container = () => {
                             className={`flex ${isWeb ? 'justify-end' : 'justify-start'}`}
                         >
                             <div
-                                className={`max-w-xs px-3 py-2 rounded-lg ${isWeb
-                                    ? 'bg-green-500 text-white rounded-br-none'
-                                    : 'bg-gray-300 text-gray-800 rounded-bl-none'
-                                    }`}
+                                className={`max-w-xs px-3 py-2 rounded-lg 
+                                    ${isWeb ? 'bg-green-500 text-white rounded-br-none' : 'bg-gray-300 text-gray-800 rounded-bl-none'}`}
                             >
                                 <div className="text-xs opacity-75 mb-1">
                                     {new Date(m.createdAt).toLocaleTimeString()}

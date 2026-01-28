@@ -2,24 +2,16 @@
 
 import Pusher from 'pusher-js'
 import { useEffect, useState } from "react";
+import { Items, Message } from '../types/model';
 
-type Items = {
-    text: string
-    from: string
-    createdAt: number
-}
-export type Message = {
-    text: string
-    from: 'line-user' | 'line-oa' | 'web'
-    userId: string
-    createdAt: number
-}
+
 
 
 export const useManageMsg = () => {
 
     const [inputText, setInputText] = useState('')
     const [listText, setListText] = useState<Items[]>([])
+    const [selectedUserId, setSelectedUserId] = useState<string | null>(null)
 
     // ส่งข้อความไปยัง API /api/send เพื่อส่งต่อไปยัง LINE
     const handleSendMsg = async () => {
@@ -28,7 +20,7 @@ export const useManageMsg = () => {
             await fetch('/api/send', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: inputText }),
+                body: JSON.stringify({ message: inputText, userId: selectedUserId }),
             })
 
             // alert("ส่งข้อความสำเร็จ ✅");
@@ -57,10 +49,17 @@ export const useManageMsg = () => {
                 cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER!,
             }
         )
+        // regis event
         const channel = pusher.subscribe('line-chat')
         channel.bind('new-message', (data: Message) => {
             setMsgs(prev => [...prev, data])
+
+            if (data.userId) {
+                setSelectedUserId(data.userId)
+            }
         })
+
+
 
         return () => {
             channel.unbind_all()

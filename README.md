@@ -1,6 +1,19 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
+สิ่งที่ต้อง config line oa , pusher
+.env ที่ควรมี
+LINE_ACCESS_TOKEN=
+LINE_USER_ID=
+
+# Pusher ทำ realtime
+PUSHER_APP_ID=
+PUSHER_KEY=
+PUSHER_SECRET=
+PUSHER_CLUSTER=
+# ไว้ใช้ฝั่ง client (ค่าเหมือนกัน กับ Pusher)
+NEXT_PUBLIC_PUSHER_KEY=
+NEXT_PUBLIC_PUSHER_CLUSTER=
 
 First, run the development server:
 
