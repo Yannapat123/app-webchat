@@ -1,0 +1,66 @@
+
+
+import { useEffect, useState } from "react";
+
+type Items = {
+    text: string
+    from: string
+    createdAt: number
+}
+export type Message = {
+    text: string
+    from: 'line-user' | 'line-oa' | 'web'
+    userId: string
+    createdAt: number
+}
+
+
+export const useManageMsg = () => {
+
+    const [inputText, setInputText] = useState('')
+    const [listText, setListText] = useState<Items[]>([])
+
+
+    const handleSendMsg = async () => {
+        try {
+
+            await fetch('/api/send', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: inputText }),
+            })
+
+            // alert("ส่งข้อความสำเร็จ ✅");
+            setInputText('');
+            setListText(prev => [
+                ...prev,
+                {
+                    from: 'web',
+                    text: inputText,
+                    createdAt: Date.now(),
+                },
+            ])
+        } catch (error) {
+            console.error(error);
+            alert("ส่งข้อความไม่สำเร็จ ❌");
+        }
+
+    }
+
+    const [msgs, setMsgs] = useState<Message[]>([])
+
+    useEffect(() => {
+        const load = async () => {
+            const res = await fetch('/api/respond')
+            console.log('res', res)
+            setMsgs(await res.json())
+        }
+
+        load()
+
+        const i = setInterval(load, 3000)
+        return () => clearInterval(i)
+    }, [])
+
+    return { handleSendMsg, listText, inputText, msgs, setInputText };
+}
