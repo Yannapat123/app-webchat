@@ -9,7 +9,7 @@ export const Container = () => {
     return (
         <>
             {msgs.length === 0 &&
-                <p className='text-red-400 text-center mx-auto mb-2'>(หมายเหตุ ต้องรับข้อความที่ user ส่งเข้ามาก่อน ถึงจะตอบกลับได้)</p>
+                <p className='text-red-400 text-center mx-auto mb-2'>(หมายเหตุ ต้องรับข้อความที่ user ส่งเข้ามาก่อน ถึงจะตอบกลับได้ เป็น text เท่านั้น)</p>
             }
             <div className="max-w-md  md:w-3xl mx-auto h-130 bg-gray-100 rounded-lg shadow-lg flex flex-col">
                 <div className="flex-1 overflow-y-auto p-4 space-y-3">

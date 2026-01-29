@@ -14,7 +14,7 @@ import { pusher } from '@/libs/service/pusher-service'
 
 export async function POST(req: Request) {
     const body = await req.json()
-
+    //  loop เพื่อดึง event ที่ส่งมาจาก LINE
     for (const event of body.events || []) {
         if (event.type === 'message' && event.message.type === 'text') {
             console.log('event.source', event)
